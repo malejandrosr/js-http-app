@@ -29,7 +29,14 @@ const state = {
  * @author M.Alejandro Salgado Ramírez <alejandrosram@outlook.com>
  */
 const loadNextPage = async () => {
-    await loadUsersByPage(state.currentPage + 1);
+    const users = await loadUsersByPage(state.currentPage + 1);
+
+    if (users.length === 0) {
+        return;
+    }
+
+    state.currentPage += 1;
+    state.users = users;
 };
 
 /**
@@ -37,8 +44,15 @@ const loadNextPage = async () => {
  * @returns void
  * @author M.Alejandro Salgado Ramírez <alejandrosram@outlook.com>
  */
-const loadPrevPage = () => {
-    throw new Error("Not implemented");
+const loadPrevPage = async () => {
+    if (state.currentPage <= 1) {
+        return;
+    }
+
+    const users = await loadUsersByPage(state.currentPage - 1);
+
+    state.currentPage -= 1;
+    state.users = users;
 };
 
 /**
@@ -65,6 +79,16 @@ export default {
     onUserChanged,
     reloadPage,
 
+    /**
+     * Returns the current state of the store.
+     * @returns {Array<User>}
+     * @author M. Alejandro Salgado Ramírez <alejandrosram@outlook.com>
+     */
     getUsers: () => [...state.users],
+    /**
+     * Returns the current page of the store.
+     * @returns {Number}
+     * @author M. Alejandro Salgado Ramírez <alejandrosram@outlook.com>
+     */
     getCurrentPage: () => state.currentPage,
 };

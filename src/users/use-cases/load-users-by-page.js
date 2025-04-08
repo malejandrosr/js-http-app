@@ -32,6 +32,10 @@ export const loadUsersByPage = async (page = 1) => {
 
     const responseJson = await response.json();
 
+    if (responseJson.last < page) {
+        return [];
+    }
+
     const users = responseJson.data.map(localhostUser);
 
     return users;

@@ -1,0 +1,10 @@
+button {
+    margin: 1em;
+}
+
+#current-page {
+    color: white !important;
+    font-size: 1.3rem;
+    margin-left: 1em;
+    margin-right: 1em;
+}
