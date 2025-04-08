@@ -5,7 +5,7 @@
  */
 const fetchQuote = async () => {
     try {
-        const url = "http://localhost:3333/random-quote";
+        const url = "http://localhost:3333/random-quote"; // custom API
 
         const response = await fetch(url, {
             method: "GET",

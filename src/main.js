@@ -1,6 +1,6 @@
-import { BreakingbadApp } from "./breakingbad/breakingbad-app";
 import javascriptLogo from "./javascript.svg";
 import "./style.css";
+import { UsersApp } from "./users/users-app";
 import viteLogo from "/vite.svg";
 
 document.querySelector("#app").innerHTML = `
@@ -20,4 +20,5 @@ document.querySelector("#app").innerHTML = `
 
 const element = document.querySelector(".card");
 
-BreakingbadApp(element);
+// BreakingbadApp(element);
+UsersApp(element);
