@@ -93,7 +93,6 @@ export const renderTable = (element) => {
         table = createTable();
         element.append(table);
 
-        // TODO: Add event listeners to the table
         table.addEventListener("click", tableSelectListener);
         table.addEventListener("click", tableDeleteListener);
     }
