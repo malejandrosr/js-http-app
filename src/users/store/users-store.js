@@ -1,15 +1,7 @@
+import { User } from "../models/user";
+import { loadNextUserId } from "../use-cases/load-next-user-id";
 import { loadUsersByPage } from "../use-cases/load-users-by-page";
 
-/**
- * @typedef {Object} User
- * @property {String} id
- * @property {String} firstName
- * @property {String} lastName
- * @property {String} avatar
- * @property {Number} balance
- * @property {String} gender
- * @property {Boolean} isActive
- */
 /**
  * @typedef {Object} State
  * @property {Number} currentPage
@@ -56,12 +48,32 @@ const loadPrevPage = async () => {
 };
 
 /**
+ * Load next user ID
+ * @returns {Promise<number>} The next user ID to be used.
+ * @author M.Alejandro Salgado Ramírez <alejandrosram@outlook.com>
+ */
+const loadNextId = async () => await loadNextUserId();
+
+/**
  * On user changed
+ * @param {User} persistedUser
  * @returns void
  * @author M.Alejandro Salgado Ramírez <alejandrosram@outlook.com>
  */
-const onUserChanged = () => {
-    throw new Error("Not implemented");
+const onUserChanged = (persistedUser) => {
+    let wasUserFound = false;
+
+    state.users = state.users.map((user) => {
+        if (user.id === persistedUser.id) {
+            return persistedUser;
+        }
+
+        return user;
+    });
+
+    if (state.users.length < 10 && !wasUserFound) {
+        state.users.push(persistedUser);
+    }
 };
 
 /**
@@ -69,13 +81,20 @@ const onUserChanged = () => {
  * @returns void
  * @author M.Alejandro Salgado Ramírez <alejandrosram@outlook.com>
  */
-const reloadPage = () => {
-    throw new Error('Not implemented');
+const reloadPage = async () => {
+    const users = await loadUsersByPage(state.currentPage);
+
+    if (users.length === 0) {
+        return;
+    }
+
+    state.users = users;
 };
 
 export default {
     loadNextPage,
     loadPrevPage,
+    loadNextId,
     onUserChanged,
     reloadPage,
 

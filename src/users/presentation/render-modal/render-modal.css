@@ -1,0 +1,37 @@
+.modal-container {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+}
+
+.hide-modal {
+    display: none !important;
+}
+
+.modal-dialog {
+    background-color: white;
+    border-radius: 1em;
+    box-shadow: 0 0.5em 1.5em rgba(255, 255, 255, 0.2);
+    padding: 1em;
+}
+
+form {
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 1em;
+    padding: 0.5em;
+}
+
+span, label {
+    color: black;
+}

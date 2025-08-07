@@ -2,13 +2,13 @@ import { localhostUserToModel } from "../mappers/localhost-user-to-model.mapper"
 import { User } from "../models/user";
 
 /**
- * Load users by page
- * @param {Number} page
- * @returns {Promise<Array<User>>}
+ * Load users by id
+ * @param {String|Number} id
+ * @returns {Promise<User>}
  * @author M.Alejandro Salgado Ramírez <alejandrosram@outlook.com>
  */
-export const loadUsersByPage = async (page = 1) => {
-    const url = `${import.meta.env.VITE_BASE_URL}/users?_page=${page}`;
+export const getUserById = async (id) => {
+    const url = `${import.meta.env.VITE_BASE_URL}/users/${id}`;
 
     const response = await fetch(url, {
         method: "GET",
@@ -23,11 +23,7 @@ export const loadUsersByPage = async (page = 1) => {
 
     const responseJson = await response.json();
 
-    if (responseJson.last < page) {
-        return [];
-    }
+    const user = localhostUserToModel(responseJson);
 
-    const users = responseJson.data.map(localhostUserToModel);
-
-    return users;
+    return user;
 };

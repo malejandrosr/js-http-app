@@ -11,22 +11,12 @@ import { User } from "../models/user";
  * @property {Boolean} isActive
  */
 /**
- * @typedef {Object} User
- * @property {String} id
- * @property {String} firstName
- * @property {String} lastName
- * @property {String} avatar
- * @property {Number} balance
- * @property {String} gender
- * @property {Boolean} isActive
- */
-/**
  * Returns a User object from localhost user data
  * @param {LocalhostUserData} localhostUserData
  * @returns {User}
  * @author M. Alejandro Salgado Ramírez <alejandrosram@outlook.com>
  */
-export const localhostUser = (localhostUserData) => {
+export const localhostUserToModel = (localhostUserData) => {
     const {
         avatar,
         balance,
